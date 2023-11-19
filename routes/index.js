@@ -6,6 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+// user saved as: {name, todos[todo1, todo2...]}
 var userData = []
 
 router.post('/todo', function(req, res) {
@@ -58,6 +59,20 @@ router.get("/user/:id", (req, res) => {
     res.send({"msg": "User not found"})
   } else {
     res.send(userData[userIndex])
+  }
+})
+
+router.put("/user", (req, res) => {
+  var userIndex = findUser(req.body.name)
+  if (userIndex == -1) {
+    res.send({"msg": "User not found"})
+  } else {
+    userData[userIndex].todos.forEach((todo, index) => {
+      if (todo == req.body.todo){
+        userData[userIndex].todos.splice(index, 1)
+      }
+      res.send({"msg": "Task deleted"})
+    });
   }
 })
 
