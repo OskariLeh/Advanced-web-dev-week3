@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 My Todos
+  label(for="") 
+  input(type="text" id="input-name" placeholder="Name")
+  input(type="text" id="input-task" placeholder="Task")
+  button(id="submit-data") Submit
+  p(id="post-msg") 
+  hr
+  input(type="text", id="search-name")
+  button(id="search") Search 
+  p(id="search-result")
