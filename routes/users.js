@@ -33,12 +33,16 @@ function findUser(name) {
 }
 
 router.delete("/user/:id", (req, res) => {
+  var lastUser = false
   var userIndex = findUser(req.params.id)
   if (userIndex == -1) {
     res.send({"msg": "User not found"})
   } else {
-    delete userData[userIndex]
-    res.send({"msg": "User Deleted"})
+    userData.splice(userIndex, 1)
+    if (userData.length == 0){
+      lastUser = true
+    }
+    res.send({"msg": "User Deleted", "lastUser": lastUser})
   }
 })
 

@@ -19,7 +19,7 @@ submitButton.addEventListener("click", () => {
         postMsg.innerText = data.msg
         if (data.first) {
             const deleteButton = document.createElement("button")
-            deleteButton.classList.add("delete-user")
+            deleteButton.id = "delete-user"
             deleteButton.textContent = "Delete"
             deleteButton.addEventListener("click", deleteFunction) 
             document.querySelector("body").appendChild(deleteButton)
@@ -31,7 +31,11 @@ function deleteFunction() {
     fetch(`http://localhost:3000/users/user/${searchInput.value}`, {method: "delete"})
     .then(response => response.json())
     .then(data => {
-        console.log(data)
+        searchResult.innerText = data.msg
+        if (data.lastUser){
+            const deleteButton = document.getElementById("delete-user")
+            deleteButton.remove()
+        } 
     }) 
 }
 
