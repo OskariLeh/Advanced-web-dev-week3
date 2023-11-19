@@ -7,7 +7,7 @@ const searchResult = document.getElementById("search-result")
 const postMsg = document.getElementById("post-msg")
 
 submitButton.addEventListener("click", () => {
-    fetch("http://localhost:3000/users/todo", {
+    fetch("http://localhost:3000/todo", {
         method: "post",
         headers: {
             "Content-type": "application/json"
@@ -28,7 +28,7 @@ submitButton.addEventListener("click", () => {
 })
 
 function deleteFunction() {
-    fetch(`http://localhost:3000/users/user/${searchInput.value}`, {method: "delete"})
+    fetch(`http://localhost:3000/user/${searchInput.value}`, {method: "delete"})
     .then(response => response.json())
     .then(data => {
         searchResult.innerText = data.msg
@@ -40,7 +40,7 @@ function deleteFunction() {
 }
 
 searchButton.addEventListener("click", () => {
-    fetch(`http://localhost:3000/users/user/${searchInput.value}`)
+    fetch(`http://localhost:3000/user/${searchInput.value}`)
     .then(response => response.json())
     .then(data => {
         if (data.todos && data.name) {
